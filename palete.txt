@@ -1,0 +1,5 @@
+Azzurro: #b5dfd3
+Azzurro chiaro: #e1f6f0
+Grigio scuro: #34433f
+Grigio/azzurro: #638383
+Azzurro/bianco: #d9fafa
