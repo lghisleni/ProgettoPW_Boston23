@@ -21,7 +21,7 @@
 </head>
 
 
-<body>
+<body onload="setupPagina('nav4')">
 
   <?php
     include 'header.html';
