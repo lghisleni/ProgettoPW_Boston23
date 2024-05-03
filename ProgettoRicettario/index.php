@@ -29,6 +29,15 @@
     include 'nav.html'
   ?>
 
+  <div id="container">
+
+    <form name="stringaRicerca" method="POST">
+		  <input id="n1" name="name" type="text" placeholder="Bo"/>
+		  <input id="searchButton" type="submit" value="Search"/>
+		</form>
+
+  </div>
+
 </body>
 
 </html>

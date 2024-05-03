@@ -29,6 +29,23 @@
     include 'nav.html'
   ?>
 
+  <div id="container">
+
+    <form name="stringaRicerca" method="POST">
+		  <input id="nomeRicetta" name="nomeRicetta" type="text" placeholder="Inserisci il nome della riccetta"/>
+      <select id="tipo" name="tipo">
+        <option value="">(Tipologia Piatto)</option>
+        <option value="antipasto">Antipasto</option>
+        <option value="primo">Primo</option>
+        <option value="secondo">Secondo</option>
+        <option value="contorno">Contorno</option>
+        <option value="dolce">Dolce</option>
+      </select>
+		  <input id="searchButton" type="submit" value="Search"/>
+		</form>
+
+  </div>
+
 </body>
 
 </html>

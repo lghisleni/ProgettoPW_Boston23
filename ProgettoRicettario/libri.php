@@ -29,6 +29,15 @@
     include 'nav.html'
   ?>
 
+  <div id="container">
+
+    <form name="stringaRicerca" method="POST">
+		  <input id="nomeLibro" name="nomeLibro" type="text" placeholder="Inserisci il nome del libro"/>
+		  <input id="searchButton" type="submit" value="Search"/>
+		</form>
+
+  </div>
+
 </body>
 
 </html>

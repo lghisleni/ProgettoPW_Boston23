@@ -1,5 +1,7 @@
 grigio scuro: #424632
 verde oliva (scuro): #556832
 verde oliva (chiaro): #6b8e23
+verdino superchiaro: #94b94e
 marroncino oliva: #898437
+marrone chiaro: #7b5000
 oliva: #808000

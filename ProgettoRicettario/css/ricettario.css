@@ -1,9 +1,113 @@
+/* header */
+header {
+    width: 100%;
+    top: 0px;
+    left: 0px;
+	margin-bottom: 5px;
+    background: #556832;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+/* body */
+body {
+    background-color: #6b8e23;
+}
+
+/* footer */
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    margin-top: 5px;
+    background: #556832;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+#containerFooter{
+    width: 100%;
+    height: 100%;
+}
+
+#testoFooterSx{
+    margin-left: 20px;
+    padding: 0px;
+    text-align: left;
+    color: black;
+    font-size: 24px;
+    float: left;
+}
+
+#testoFooterDx{
+    margin-right: 20px;
+    padding: 0px;
+    text-align: right;
+    color: black;
+    font-size: 24px;
+    float: right;
+}
+
+/* container e form ricerca */
+#container {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #7b5000;
+    border-radius: 2px;
+}
+
+
+form input[type="text"]{
+    color: black;
+    background-color: #94b94e;
+    width: 50%;
+    padding: 10px;
+    margin: 10px 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 24px;
+}
+
+form select {
+    color: black;
+    background-color: #94b94e;
+    width: 250px;
+    padding: 10px;
+    margin: 10px 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 24px;
+}
+
+#searchButton {
+    color: black;
+    background-color: #94b94e;
+    width: 10%;
+    padding: 10px;
+    margin: 10px 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 24px;
+}
+
+/* altri elementi*/
+h1 {
+	padding: 10px;
+	margin: 0px;
+	font-size : 60px;
+	color: black;
+	text-align: center;
+}
+
+/* nav */
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #424632;
   }
   
 li {
@@ -16,6 +120,8 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-size: 24px;
+    font-family: "Bebas Neue", sans-serif;
 }
   
 li a:hover:not(.active) {
@@ -23,5 +129,5 @@ li a:hover:not(.active) {
 }
   
 .active {
-    background-color: #04AA6D;
+    background-color: #7b5000;
 }

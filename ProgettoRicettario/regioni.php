@@ -29,6 +29,15 @@
     include 'nav.html'
   ?>
 
+  <div id="container">
+
+    <form name="stringaRicerca" method="POST">
+		  <input id="nomeRegione" name="nomeRegione" type="text" placeholder="Inserisci il nome della regione"/>
+		  <input id="searchButton" type="submit" value="Search"/>
+		</form>
+
+  </div>
+
 </body>
 
 </html>
