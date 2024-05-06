@@ -26,7 +26,9 @@
   <?php
     include 'header.html';
     include 'footer.html';
-    include 'nav.html'
+    include 'nav.html';
+    include 'dbQuery.php';
+
   ?>
 
   <div id="container">
@@ -36,6 +38,77 @@
 		  <input id="searchButton" type="submit" value="Search"/>
 		</form>
 
+    <div  id="risultati">
+
+    <?php
+	      $codice = "";
+	      $titolo  = "";
+        $anno  = "";	
+	      if(count($_POST)>0) {
+		      $codice = $_POST["codice"];
+		      $titolo = $_POST["nomeLibro"];
+          $anno = $_POST["anno"];
+	      }	     
+	      else if(count($_GET)>0) {
+		      $codice = $_GET["codice"];
+		      $titolo = $_GET["nomeLibro"];
+          $anno = $_GET["anno"];
+	      }	     
+	      
+        $query = getLibriQry($numero, $titolo, $tipo);
+        echo "<p id=query><b><u>Libro Query</u></b>: " . formattaQuery($query) . "</p>";
+
+	      include 'connDb.php';
+
+	      try {   
+		      $result = $conn->query($query);
+	      } catch(PDOException$e) {
+		      echo "<p> DB Error on Query: " . $e->getMessage() . "</p>";
+		      $error = true;
+	      }
+	      if(!$error) {      
+      ?>
+
+      <table class="table">
+
+				<tr class="header">
+          <th>#</th>
+					<th>codice ISBN</th> 
+					<!--th>id </th--> 
+					<th>titolo libro</th> 
+					<th>anno di pubblicazione</th>
+          <th># ricette</th>
+          <th># pagine</th> 
+				</tr>
+      
+        <?php
+		      $i=0;
+		      foreach($result as $riga) {
+			    $i=$i+1;
+			    $classRiga='class="rowOdd"';
+			    if($i%2==0) {
+			    	$classRiga='class="rowEven"';
+			    }
+			    $codice=$riga["codISBN"];
+			    $titolo=$riga["titolo"];
+			    $anno=$riga["anno"];
+          $numeroRicette=$riga["nRicette"];
+          $numeroPagine=$riga["nPagine"];
+        ?>
+      
+        <tr <?php	echo $classRiga; ?> > 
+			    <td > <?php echo $i; ?> </td>    						
+				  <td > <?php echo $codice; ?> </td>    
+				  <td > <?php echo $titolo; ?> </td> 
+				  <td > <?php echo $anno; ?> </td>
+          <td > <?php echo $numeroRicette; ?> </td>
+          <td > <?php echo $numeroPagine; ?> </td>
+			  </tr>
+      
+        <?php } ?>
+			</table>
+    <?php }  ?>
+    </div>
   </div>
 
 </body>
