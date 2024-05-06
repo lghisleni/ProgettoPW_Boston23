@@ -26,16 +26,80 @@
   <?php
     include 'header.html';
     include 'footer.html';
-    include 'nav.html'
+    include 'nav.html';
+    include 'dbQuery.php';
   ?>
 
   <div id="container">
 
     <form name="stringaRicerca" method="POST">
-		  <input id="nomeRegione" name="nomeRegione" type="text" placeholder="Inserisci il nome della regione"/>
-		  <input id="searchButton" type="submit" value="Search"/>
-		</form>
+		<input id="nome" name="nome" type="text" placeholder="Inserisci il nome della regione"/>
+		<input id="searchButton" type="submit" value="Search"/>
+	</form>
 
+    <div  id="risultati">
+
+      <?php
+	      $cod = "";
+	      $nome  = "";	
+	      if(count($_POST)>0) {
+		      $cod = $_POST["cod"];
+		      $nome = $_POST["nome"];
+	      }	     
+	      else if(count($_GET)>0) {
+		      $cod = $_GET["cod"];
+		      $nome = $_GET["nome"];
+	      }	     
+	      
+        $query = getRegioneQry($cod, $nome);
+        echo "<p id=query><b><u>Regione Query</u></b>: " . formattaQuery($query) . "</p>";
+
+	      include 'connDb.php';
+
+	      try {   
+		      $result = $conn->query($query);
+	      } catch(PDOException$e) {
+		      echo "<p> DB Error on Query: " . $e->getMessage() . "</p>";
+		      $error = true;
+	      }
+	      if(!$error) {      
+      ?>
+
+      <table class="table">
+
+				<tr class="header">
+          <th>#</th>
+					<th>Codice</th> 
+					<!--th>id </th--> 
+					<th>Nome</th> 
+					<th>NumeroRicette</th> 
+				</tr>
+      
+        <?php
+		      $i=0;
+		      foreach($result as $riga) {
+			    $i=$i+1;
+			    $classRiga='class="rowOdd"';
+			    if($i%2==0) {
+			    	$classRiga='class="rowEven"';
+			    }
+			    $cod=$riga["cod"];
+			    $nome=$riga["nome"];
+			    $n=$riga["nRicette"];
+        ?>
+      
+        <tr <?php	echo $classRiga; ?> > 
+			    <td > <?php echo $i; ?> </td>    						
+				  <td > <?php echo $cod; ?> </td>    
+				  <td > <?php echo $nome; ?> </td> 
+				  <td > <?php echo $n; ?> </td> 
+			  </tr>
+      
+        <?php } ?>
+			</table>
+    <?php }  ?>
+    
+    </div>
   </div>
 
 </body>

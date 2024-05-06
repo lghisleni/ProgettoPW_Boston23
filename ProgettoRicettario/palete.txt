@@ -3,5 +3,6 @@ verde oliva (scuro): #556832
 verde oliva (chiaro): #6b8e23
 verdino superchiaro: #94b94e
 marroncino oliva: #898437
-marrone chiaro: #7b5000
+viola: #6B4B62
+arancio: #8B4513
 oliva: #808000

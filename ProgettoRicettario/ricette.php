@@ -26,7 +26,8 @@
   <?php
     include 'header.html';
     include 'footer.html';
-    include 'nav.html'
+    include 'nav.html';
+    include 'dbQuery.php';
   ?>
 
   <div id="container">
@@ -44,6 +45,77 @@
 		  <input id="searchButton" type="submit" value="Search"/>
 		</form>
 
+    <div  id="risultati">
+
+      <?php
+	      $numero = "";
+	      $titolo  = "";
+        $tipo  = "";	
+	      if(count($_POST)>0) {
+		      $numero = $_POST["numero"];
+		      $titolo = $_POST["nomeRicetta"];
+          $tipo = $_POST["tipo"];
+	      }	     
+	      else if(count($_GET)>0) {
+		      $numero = $_GET["numero"];
+		      $titolo = $_GET["nomeRicetta"];
+          $tipo = $_GET["tipo"];
+	      }	     
+	      
+        $query = getRicettaQry($numero, $titolo, $tipo);
+        echo "<p id=query><b><u>Ricetta Query</u></b>: " . formattaQuery($query) . "</p>";
+
+	      include 'connDb.php';
+
+	      try {   
+		      $result = $conn->query($query);
+	      } catch(PDOException$e) {
+		      echo "<p> DB Error on Query: " . $e->getMessage() . "</p>";
+		      $error = true;
+	      }
+	      if(!$error) {      
+      ?>
+
+      <table class="table">
+
+				<tr class="header">
+          <th>#</th>
+					<th>numero</th> 
+					<!--th>id </th--> 
+					<th>titolo ricetta</th> 
+					<th>tipo ricetta</th>
+          <th>titolo libro</th>
+          <th># libri</th> 
+				</tr>
+      
+        <?php
+		      $i=0;
+		      foreach($result as $riga) {
+			    $i=$i+1;
+			    $classRiga='class="rowOdd"';
+			    if($i%2==0) {
+			    	$classRiga='class="rowEven"';
+			    }
+			    $numero=$riga["numero"];
+			    $titoloRicetta=$riga["titolo"];
+			    $tipoRicetta=$riga["tipo"];
+          $titoloLibro=$riga["titololibro"];
+          $nLibri=$riga["nlibri"];
+        ?>
+      
+        <tr <?php	echo $classRiga; ?> > 
+			    <td > <?php echo $i; ?> </td>    						
+				  <td > <?php echo $numero; ?> </td>    
+				  <td > <?php echo $titoloRicetta; ?> </td> 
+				  <td > <?php echo $tipoRicetta; ?> </td>
+          <td > <?php echo $titoloLibro; ?> </td>
+          <td > <?php echo $nLibri; ?> </td>
+			  </tr>
+      
+        <?php } ?>
+			</table>
+    <?php }  ?>
+    </div>
   </div>
 
 </body>

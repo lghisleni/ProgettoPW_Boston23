@@ -1,7 +1,7 @@
 <?php
-	$servername= "localhost";
-	$username = "programmazzioneweblg";
-	$dbname= "my_programmazioneweblg";
+	$servername = "localhost";
+	$username = "programmazioneweblg";
+	$dbname = "my_programmazioneweblg";
 	$password = null;
 	$error = false;
 	
