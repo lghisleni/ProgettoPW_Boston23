@@ -129,7 +129,7 @@ function insertIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $qua
 }
 
 function deleteIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita): string {
-    $qry = "DELETE FROM Ingrediente WHERE numeroRicetta = '$numeroRicetta' AND numero = '$numero' AND ingrediente = '$ingrediente' AND quantita = '$quantita'";
+    $qry = "DELETE FROM Ingrediente WHERE numeroRicetta = ':numeroRicetta' AND numero = ':numero' AND ingrediente = ':ingrediente' AND quantita = ':quantita'";
     // Preparazione dello statement
     $stmt = $conn->prepare($qry);
 
