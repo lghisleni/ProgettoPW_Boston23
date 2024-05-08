@@ -126,7 +126,78 @@ function insertIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $qua
         $stmt->execute([$numeroRicetta, $numero, $ingrediente, $quantita]);
         return "Ingrediente inserito correttamente.";
     }
-}   
+}
+
+function deleteIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita): string {
+    $qry = "DELETE FROM Ingrediente WHERE numeroRicetta = '$numeroRicetta' AND numero = '$numero' AND ingrediente = '$ingrediente' AND quantita = '$quantita'";
+    // Preparazione dello statement
+    $stmt = $conn->prepare($qry);
+
+    // Binding dei parametri
+    $stmt->bindParam(':numeroRicetta', $numeroRicetta);
+    $stmt->bindParam(':numero', $numero);
+    $stmt->bindParam(':ingrediente', $ingrediente);
+    $stmt->bindParam(':quantita', $quantita);
+
+    // Esecuzione dello statement
+    try {
+        $stmt->execute();
+        return "Ingrediente eliminato correttamente.";
+    } catch (PDOException $e) {
+        return "Errore durante l'eliminazione dell'ingrediente: " . $e->getMessage();
+    }
+}
+
+function updateIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita) {
+    // Verifico se esiste già un ingrediente con lo stesso nome nella stessa ricetta e diverso numero
+    $controllaRicetta = "SELECT 1 FROM Ingrediente 
+                         WHERE ingrediente = :ingrediente AND numeroRicetta = :numeroRicetta AND numero != :numero";
+    $stmt = $conn->prepare($controllaRicetta);
+    $stmt->bindParam(':ingrediente', $ingrediente);
+    $stmt->bindParam(':numeroRicetta', $numeroRicetta);
+    $stmt->bindParam(':numero', $numero);
+    $stmt->execute();
+
+    if ($stmt->fetch()) {
+        return "Un ingrediente con lo stesso nome esiste già nella ricetta specificata.";
+    }
+
+    // Verifico se esiste già nel database un ingrediente con lo stesso nome dell'ingrediente modificato
+    $controllaIngrediente = "SELECT numero FROM Ingrediente WHERE ingrediente = :ingrediente";
+    $stmt = $conn->prepare($controllaIngrediente);
+    $stmt->bindParam(':ingrediente', $ingrediente);
+    $stmt->execute();
+    $esiste = $stmt->fetch();
+
+    if ($esiste) {
+        // Se l'ingrediente esiste già, utilizzo il suo numero esistente
+        $numero = $esiste['numero'];
+    } else {
+        // Altrimenti assegno un nuovo numero
+        $getMaxId = "SELECT MAX(numero) AS maxNumero FROM Ingrediente";
+        $stmt = $conn->query($getMaxId);
+        $maxRow = $stmt->fetch();
+        $numero = $maxRow['maxNumero'] + 1;
+    }
+
+    // Aggiornamento
+    $updateQuery = "UPDATE Ingrediente SET
+                    numeroRicetta = :newNumeroRicetta,
+                    numero = :newNumero,
+                    ingrediente = :newIngrediente,
+                    quantita = :newQuantita
+                    WHERE numero = :originalNumero";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bindParam(':newNumeroRicetta', $numeroRicetta);
+    $stmt->bindParam(':newNumero', $numero);
+    $stmt->bindParam(':newIngrediente', $ingrediente);
+    $stmt->bindParam(':newQuantita', $quantita);
+    $stmt->bindParam(':originalNumero', $numero);
+    $stmt->execute();
+
+    return "Ingrediente aggiornato correttamente.";
+}
+
 
 function formattaQuery($inputString) {
     // Controlla se la stringa di input non è vuota
