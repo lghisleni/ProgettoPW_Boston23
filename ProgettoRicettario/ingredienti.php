@@ -21,18 +21,20 @@
 </head>
 
 
-<body onload="setupPagina('nav4')">
+<body>
 
   <?php
     include 'header.html';
     include 'footer.html';
     include 'nav.html';
     include 'dbQuery.php';
-
+    include 'popupDelete.html';
   ?>
 
   <div id="container">
 
+    
+    
     <form name="stringaRicerca" method="POST">
 		  <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Inserisci il nome dell'ingrediente"/>
 		  <input id="searchButton" type="submit" value="Search"/>
@@ -82,7 +84,9 @@
 					<th>numero ingrediente</th> 
 					<th>nome ingrediente</th>
           <th># quantita</th>
-          <th># nome ricetta</th> 
+          <th># nome ricetta</th>
+          <th>Delete</th>
+          <th>Update</th>
 				</tr>
       
         <?php
@@ -107,6 +111,12 @@
 				  <td > <?php echo $ingrediente; ?> </td>
           <td > <?php echo $quantita; ?> </td>
           <td > <?php echo $nomericetta; ?> </td>
+          <td > <button type="submit" class="btnDelete" onclick="openPopupDelete(
+            '<?php echo $numeroRicetta; ?>',
+            '<?php echo $numero; ?>',
+            '<?php echo $ingrediente; ?>',
+            '<?php echo $quantita; ?>'
+          )"> delete </button> </td>
 			  </tr>
       
         <?php } ?>

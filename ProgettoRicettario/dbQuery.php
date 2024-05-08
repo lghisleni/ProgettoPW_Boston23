@@ -1,4 +1,15 @@
 <?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['functionName'])) {
+        switch ($_POST['functionName']) {
+            case 'deleteIngredientiQry':
+                deleteIngredientiQry($_POST['numeroRicetta'], $_POST['numero'], $_POST['ingrediente'], $_POST['quantita']);
+                break;
+        }
+    }
+}
+
 function getRicettaQry($numero, $titolo, $tipo): string {
     $numeroLibri = "(SELECT Ricetta.numero AS numero1, COUNT(DISTINCT Libro.codISBN) AS nlibri1 " .
                     "FROM Ricetta " .
@@ -128,8 +139,10 @@ function insertIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $qua
     }
 }
 
-function deleteIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita): string {
-    $qry = "DELETE FROM Ingrediente WHERE numeroRicetta = ':numeroRicetta' AND numero = ':numero' AND ingrediente = ':ingrediente' AND quantita = ':quantita'";
+function deleteIngredientiQry($numeroRicetta, $numero, $ingrediente, $quantita): string {
+    $qry = "DELETE FROM Ingrediente WHERE numeroRicetta = :numeroRicetta AND numero = :numero AND ingrediente = :ingrediente AND quantita = :quantita";
+    
+    include 'connDb.php';
     // Preparazione dello statement
     $stmt = $conn->prepare($qry);
 

@@ -171,3 +171,56 @@ th, td {
     text-align: center;
 }
 
+.btnDelete{
+    color: black;
+    background-color: #8B4513;
+    border: 3px solid black;
+    border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.popupDelete{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+}
+
+.popupDelete img{
+    width: 100%;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.popupDelete h2{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popupDelete button{
+    color: black;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.open-popupDelete {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+

@@ -28,7 +28,6 @@
     include 'footer.html';
     include 'nav.html';
     include 'dbQuery.php';
-
   ?>
 
   <div id="container">

@@ -34,3 +34,46 @@ function setH1ricette() {
 function setH1libri() {       
 	$("#titoloHeader").eq(0).html("Libri");
 }
+
+let rowToDelete = []
+
+function openPopupDelete($numeroRicetta, $numero, $ingrediente, $quantita){ 
+    rowToDelete[0] = $numeroRicetta;
+    rowToDelete[1] = $numero;
+    rowToDelete[2] = $ingrediente
+    rowToDelete[3] = $quantita;
+    var popUpDelete = document.getElementById("popupDelete")
+    popUpDelete.classList.add("open-popupDelete")
+}
+
+function annulaEliminazione(){
+    var popUpDelete = document.getElementById("popupDelete")
+    popUpDelete.classList.remove("open-popupDelete")
+}
+
+
+function eliminaDefinitivamente() {
+    var popUpDelete = document.getElementById("popupDelete")
+    popUpDelete.classList.remove("open-popupDelete")
+    var numeroRicetta = rowToDelete[0];
+    var numero = rowToDelete[1];
+    var ingrediente = rowToDelete[2];
+    var quantita = rowToDelete[3];
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://programmazioneweblg.altervista.org/ProgettoRicettario/dbQuery.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        }
+    };
+
+    let parameters = "functionName=deleteIngredientiQry" +
+                 "&numeroRicetta=" + encodeURIComponent(numeroRicetta) +
+                 "&numero=" + encodeURIComponent(numero) +
+                 "&ingrediente=" + encodeURIComponent(ingrediente) +
+                 "&quantita=" + encodeURIComponent(quantita);
+
+    xhr.send(parameters);
+}
