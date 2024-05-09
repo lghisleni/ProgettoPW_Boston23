@@ -11,7 +11,7 @@
 
   <!-- script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="./js/ricettario.js"></script>
+  <script type="text/javascript" src="./js/ricettario.js" defer></script>
 
   <!-- link per scaricare i font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,19 +29,20 @@
     include 'nav.html';
     include 'dbQuery.php';
     include 'popupDelete.html';
+    include 'popupUpdate.php';
+    include 'popupInsert.php';
   ?>
 
   <div id="container">
-
-    
-    
+  
     <form name="stringaRicerca" method="POST">
 		  <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Inserisci il nome dell'ingrediente"/>
 		  <input id="searchButton" type="submit" value="Search"/>
 		</form>
 
-    <div  id="risultati">
+    <button type="submit" class="btnInsert" onclick="openPopupInsert()"> insert </button>
 
+    <div  id="risultati">
     <?php
 	      $numeroRicetta = "";
 	      $numero  = "";
@@ -117,8 +118,13 @@
             '<?php echo $ingrediente; ?>',
             '<?php echo $quantita; ?>'
           )"> delete </button> </td>
+          <td > <button type="submit" class="btnUpdate" onclick="openPopupUpdate(
+            '<?php echo $numeroRicetta; ?>',
+            '<?php echo $numero; ?>',
+            '<?php echo $ingrediente; ?>',
+            '<?php echo $quantita; ?>'
+          )"> update </button> </td>
 			  </tr>
-      
         <?php } ?>
 			</table>
     <?php }  ?>

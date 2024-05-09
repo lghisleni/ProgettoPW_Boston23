@@ -6,7 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'deleteIngredientiQry':
                 deleteIngredientiQry($_POST['numeroRicetta'], $_POST['numero'], $_POST['ingrediente'], $_POST['quantita']);
                 break;
-        }
+            case 'updateIngredientiQry':
+                updateIngredientiQry($_POST['numeroRicetta'], $_POST['numero'], $_POST['ingrediente'], $_POST['quantita']);
+                break;
+            case 'insertIngredientiQry':
+                insertIngredientiQry($_POST['numeroRicetta'], $_POST['ingrediente'], $_POST['quantita']);
+                break;
+        } 
     }
 }
 
@@ -103,39 +109,42 @@ function getIngredientiQry($numeroRicetta, $numero, $ingrediente, $quantita): st
     return $qry; 
 }
 
-function insertIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita): string {
-    $controllo = "SELECT 1 FROM Ingrediente " .
-                    "WHERE Ingrediente.ingrediente = '$ingrediente' AND Ingrediente.numeroRicetta = '$numeroRicetta'";
-    $stmt = $conn->prepare($controllo);
-    $stmt->execute([$ingrediente, $numeroRicetta]);
-    $esisteNellaRicetta = $stmt->fetch();
+function insertIngredientiQry($numeroRicetta, $ingrediente, $quantita){
+    include 'connDb.php';
     
-    if ($esisteNellaRicetta) {
-        // L'ingrediente esiste già per questa ricetta, non inserire nulla
-        return "L'ingrediente esiste già per questa ricetta.";
-    } else {
-        // Controlla se l'ingrediente esiste già in qualche ricetta
-        $controlloGenerale = "SELECT Ingrediente.numero FROM Ingrediente WHERE Ingrediente.ingrediente = '$ingrediente'";
-        $stmt = $conn->prepare($controlloGenerale);
-        $stmt->execute([$ingrediente]);
-        $ingredienteEsistente = $stmt->fetch();
-        if ($ingredienteEsistente) {
-            // Usa il numero esistente per l'ingrediente trovato
-            $numero = $ingredienteEsistente['numero'];
-        } else {
-            // L'ingrediente non esiste, trova il numero massimo e incrementa per un nuovo ingrediente
-            $trovaMax = "SELECT MAX(numero) AS maxNumero FROM Ingrediente";
-            $stmt = $conn->prepare($trovaMax);
-            $stmt->execute();
-            $maxRow = $stmt->fetch();
-            $numero = $maxRow['maxNumero'] + 1;
-        }
+    try {
+        // Controlla se l'ingrediente esiste già per questa ricetta
+        $stmt = $conn->prepare("SELECT 1 FROM Ingrediente WHERE ingrediente = ? AND numeroRicetta = ?");
+        $stmt->execute([$ingrediente, $numeroRicetta]);
+        $esisteNellaRicetta = $stmt->fetch();
 
-        // Inserisci il nuovo ingrediente con il numero ottenuto
-        $inserimento = "INSERT INTO Ingrediente (numeroRicetta, numero, ingrediente, quantita) VALUES ('$numeroRicetta', '$numero', '$ingrediente', '$quantita')";
-        $stmt = $conn->prepare($inserimento);
-        $stmt->execute([$numeroRicetta, $numero, $ingrediente, $quantita]);
-        return "Ingrediente inserito correttamente.";
+        if (!$esisteNellaRicetta) {
+            // Controlla se l'ingrediente esiste già in qualche ricetta
+            $stmt = $conn->prepare("SELECT numero FROM Ingrediente WHERE ingrediente = ?");
+            $stmt->execute([$ingrediente]);
+            $ingredienteEsistente = $stmt->fetch();
+
+            if ($ingredienteEsistente) {
+                // Usa il numero esistente per l'ingrediente trovato
+                $numero = $ingredienteEsistente['numero'];
+            } else {
+                // L'ingrediente non esiste, trova il numero massimo e incrementa per un nuovo ingrediente
+                $stmt = $conn->query("SELECT MAX(numero) AS maxNumero FROM Ingrediente");
+                $maxRow = $stmt->fetch();
+                $numero = $maxRow['maxNumero'] + 1;
+            }
+
+            // Inserisci il nuovo ingrediente con il numero ottenuto
+            $stmt = $conn->prepare("INSERT INTO Ingrediente (numeroRicetta, numero, ingrediente, quantita) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$numeroRicetta, $numero, $ingrediente, $quantita]);
+            
+            return "Ingrediente inserito correttamente.";
+        } else {
+            return "L'ingrediente esiste già per questa ricetta.";
+        }
+    } catch (PDOException $e) {
+        // Gestione degli errori
+        return "Errore durante l'inserimento dell'ingrediente: " . $e->getMessage();
     }
 }
 
@@ -161,8 +170,10 @@ function deleteIngredientiQry($numeroRicetta, $numero, $ingrediente, $quantita):
     }
 }
 
-function updateIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $quantita) {
+function updateIngredientiQry($numeroRicetta, $numero, $ingrediente, $quantita) {
+
     // Verifico se esiste già un ingrediente con lo stesso nome nella stessa ricetta e diverso numero
+    include 'connDb.php';
     $controllaRicetta = "SELECT 1 FROM Ingrediente 
                          WHERE ingrediente = :ingrediente AND numeroRicetta = :numeroRicetta AND numero != :numero";
     $stmt = $conn->prepare($controllaRicetta);
@@ -170,10 +181,6 @@ function updateIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $qua
     $stmt->bindParam(':numeroRicetta', $numeroRicetta);
     $stmt->bindParam(':numero', $numero);
     $stmt->execute();
-
-    if ($stmt->fetch()) {
-        return "Un ingrediente con lo stesso nome esiste già nella ricetta specificata.";
-    }
 
     // Verifico se esiste già nel database un ingrediente con lo stesso nome dell'ingrediente modificato
     $controllaIngrediente = "SELECT numero FROM Ingrediente WHERE ingrediente = :ingrediente";
@@ -184,33 +191,30 @@ function updateIngredientiQry($conn, $numeroRicetta, $numero, $ingrediente, $qua
 
     if ($esiste) {
         // Se l'ingrediente esiste già, utilizzo il suo numero esistente
-        $numero = $esiste['numero'];
+        $numeroNew = $esiste['numero'];
     } else {
         // Altrimenti assegno un nuovo numero
         $getMaxId = "SELECT MAX(numero) AS maxNumero FROM Ingrediente";
         $stmt = $conn->query($getMaxId);
         $maxRow = $stmt->fetch();
-        $numero = $maxRow['maxNumero'] + 1;
+        $numeroNew = $maxRow['maxNumero'] + 1;
     }
 
     // Aggiornamento
     $updateQuery = "UPDATE Ingrediente SET
-                    numeroRicetta = :newNumeroRicetta,
                     numero = :newNumero,
                     ingrediente = :newIngrediente,
                     quantita = :newQuantita
-                    WHERE numero = :originalNumero";
+                    WHERE numero = :originalNumero AND numeroRicetta = :numeroRicetta";
     $stmt = $conn->prepare($updateQuery);
-    $stmt->bindParam(':newNumeroRicetta', $numeroRicetta);
-    $stmt->bindParam(':newNumero', $numero);
+    $stmt->bindParam(':newNumero', $numeroNew);
     $stmt->bindParam(':newIngrediente', $ingrediente);
     $stmt->bindParam(':newQuantita', $quantita);
     $stmt->bindParam(':originalNumero', $numero);
+    $stmt->bindParam(':numeroRicetta', $numeroRicetta);
+
     $stmt->execute();
-
-    return "Ingrediente aggiornato correttamente.";
 }
-
 
 function formattaQuery($inputString) {
     // Controlla se la stringa di input non è vuota
