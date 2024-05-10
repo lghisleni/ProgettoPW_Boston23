@@ -98,6 +98,12 @@ form select {
 }
 
 /* altri elementi*/
+.stringaRicerca, .btnInsert {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+
 h1 {
 	padding: 10px;
 	margin: 0px;
@@ -295,9 +301,10 @@ th, td {
 /* CRUD insert */
 .btnInsert{
     color: black;
-    background-color: #006983;
+    background-color: #a10049;
     width: 10%;
     padding: 10px;
+    margin-right: 0px;
     margin: 10px 10px;
     border: 1px solid black;
     border-radius: 2px;
@@ -307,7 +314,7 @@ th, td {
 
 .popupInsert{
     width: 400px;
-    background: #006983;
+    background: #a10049;
     border-radius: 6px;
     position: absolute;
     font-family: "Bebas Neue", sans-serif;
@@ -327,6 +334,12 @@ th, td {
     border-radius: 50%;
     scale: 0.8;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.popupInsert h2{
+    font-size: 30px;
+    font-weight: 500;
+    margin: 30px 0 10px;
 }
 
 #insert {
