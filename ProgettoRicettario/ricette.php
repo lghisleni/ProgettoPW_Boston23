@@ -16,7 +16,7 @@
   <!-- link per scaricare i font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Briem+Hand:wght@100..900&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -62,9 +62,18 @@
           $tipo = $_GET["tipo"];
 	      }	     
 	      
-        $query = getRicettaQry($numero, $titolo, $tipo);
-        echo "<p id=query><b><u>Ricetta Query</u></b>: " . formattaQuery($query) . "</p>";
-
+        if(!empty($_POST["regione"])){
+          $query = getRicettaPerRegioneQry($_POST["regione"]);
+        } else if(!empty($_GET["regione"])){
+          $query = getRicettaPerRegioneQry($_GET["regione"]);
+        } else if(!empty($_POST["codiceLibro"])){
+          $query = getRicettePerLibro($_POST["codiceLibro"]);
+        } else if(!empty($_GET["codiceLibro"])) {
+          $query = getRicettePerLibro($_GET["codiceLibro"]);
+        } else {
+          $query = getRicettaQry($numero, $titolo, $tipo);
+        }
+        
 	      include 'connDb.php';
 
 	      try {   
@@ -106,9 +115,9 @@
         <tr <?php	echo $classRiga; ?> > 
 			    <td > <?php echo $i; ?> </td>    						
 				  <td > <?php echo $numero; ?> </td>    
-				  <td > <?php echo $titoloRicetta; ?> </td> 
+				  <td > <?php echo formattaLinkRicetta1($numero, $titoloRicetta); ?> </td> 
 				  <td > <?php echo $tipoRicetta; ?> </td>
-          <td > <?php echo $titoloLibro; ?> </td>
+          <td > <?php echo formattaLinkRicetta2($titoloLibro); ?> </td>
           <td > <?php echo $nLibri; ?> </td>
 			  </tr>
       

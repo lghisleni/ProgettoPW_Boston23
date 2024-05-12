@@ -216,18 +216,87 @@ function updateIngredientiQry($numeroRicetta, $numero, $ingrediente, $quantita) 
     $stmt->execute();
 }
 
-function formattaQuery($inputString) {
-    // Controlla se la stringa di input non è vuota
-    if (empty($inputString)) {
-        return "La stringa di input è vuota.";
+function formattaLinkIngrediente($nomeRicetta): String{
+	return "<a href='ricette.php?nomeRicetta=" . $nomeRicetta . "'>" . $nomeRicetta . "</a>";
+}
+
+function formattaLinkRegioni($n, $codice) {
+    return "<a href='ricette.php?regione=" . urlencode($codice) . "'>" . $n . "</a>";
+}
+
+function getRicettaPerRegioneQry($codiceRegione): string {
+    $numeroLibri = "(SELECT Ricetta.numero AS numero1, COUNT(DISTINCT Libro.codISBN) AS nlibri1 " .
+                    "FROM Ricetta " .
+                    "JOIN RicettaPubblicata ON Ricetta.numero = RicettaPubblicata.numeroRicetta " . 
+                    "JOIN Pagina ON RicettaPubblicata.libro = Pagina.libro " . 
+                    "JOIN Libro ON Pagina.libro = Libro.codISBN " .
+                    "GROUP BY Ricetta.numero) AS Ricetta1";
+
+    $qry = "SELECT DISTINCT Ricetta.numero AS numero, Ricetta.titolo AS titolo, Ricetta.tipo AS tipo, Libro.titolo AS titololibro, Ricetta1.nlibri1 AS nlibri " .
+           "FROM Ricetta " .
+           "JOIN RicettaPubblicata ON Ricetta.numero = RicettaPubblicata.numeroRicetta " . 
+           "JOIN Pagina ON RicettaPubblicata.libro = Pagina.libro " . 
+           "JOIN Libro ON Pagina.libro = Libro.codISBN " .
+           "JOIN " . $numeroLibri . " ON Ricetta.numero = Ricetta1.numero1 " .
+           "JOIN RicettaRegionale ON Ricetta.numero = RicettaRegionale.ricetta " .
+           "WHERE 1=1 ";
+
+    if ($codiceRegione != "") {
+        $qry .= "AND RicettaRegionale.regione = '$codiceRegione' ";
     }
 
-    $search = array("SELECT", "FROM", "WHERE", "GROUP BY", "ORDER BY");
-    $replace = array("\n<br><b style='color:#8B4513;'>SELECT</b>", "\n<br><b style='color:#8B4513;'>FROM</b>", "\n<br><b style='color:#8B4513;'>WHERE</b>", "\n<br><b style='color:#8B4513;'>GROUP BY</b>", "\n<br><b style='color:#8B4513;'>ORDER BY</b>");
+    $qry .= "GROUP BY Ricetta.numero, Ricetta.titolo, Ricetta.tipo, Libro.titolo " .
+            "ORDER BY Ricetta.numero";
 
-    // Sostituisci il punto "." con un carattere di nuova riga "\n"
-    $outputString = str_replace($search, $replace, $inputString);
-
-    return $outputString;
+    return $qry;
 }
+
+
+function formattaLinkRicetta1($numero, $nomeRicetta): String{
+	return "<a href='ingredienti.php?nRicetta=" . $numero . "'>" . $nomeRicetta . "</a>";
+}
+
+function getIngredientiPerRicetta($numeroRicetta): string {
+    $qry = "SELECT Ingrediente.numeroRicetta as ricetta, Ingrediente.numero as numero, Ingrediente.ingrediente as ingrediente, Ingrediente.quantita as quantita, Ricetta.titolo as nomericetta " . 
+            "FROM Ingrediente " . 
+            "JOIN Ricetta ON Ingrediente.numeroRicetta = Ricetta.numero " . 
+            "WHERE Ingrediente.numeroRicetta = '$numeroRicetta' " .
+            "ORDER BY Ingrediente.numero";
+    return $qry; 
+}
+
+function formattaLinkRicetta2($titoloLibro){
+    return "<a href='libri.php?nomeLibro=" . $titoloLibro . "'>" . $titoloLibro . "</a>";
+}
+
+function formattaLinkLibri($numeroRicette, $codice){
+    return "<a href='ricette.php?codiceLibro=" . $codice . "'>" . $numeroRicette . "</a>";
+}
+
+function getRicettePerLibro($codiceLibro): string {
+    $numeroLibri = "(SELECT Ricetta.numero AS numero1, COUNT(DISTINCT Libro.codISBN) AS nlibri1 " .
+                    "FROM Ricetta " .
+                    "JOIN RicettaPubblicata ON Ricetta.numero = RicettaPubblicata.numeroRicetta " . 
+                    "JOIN Pagina ON RicettaPubblicata.libro = Pagina.libro " . 
+                    "JOIN Libro ON Pagina.libro = Libro.codISBN " .
+                    "GROUP BY Ricetta.numero) AS Ricetta1";
+
+    $qry = "SELECT DISTINCT Ricetta.numero AS numero, Ricetta.titolo AS titolo, Ricetta.tipo AS tipo, Libro.titolo AS titololibro, Ricetta1.nlibri1 AS nlibri " .
+           "FROM Ricetta " .
+           "JOIN RicettaPubblicata ON Ricetta.numero = RicettaPubblicata.numeroRicetta " . 
+           "JOIN Pagina ON RicettaPubblicata.libro = Pagina.libro " . 
+           "JOIN Libro ON Pagina.libro = Libro.codISBN " .
+           "JOIN " . $numeroLibri . " ON Ricetta.numero = Ricetta1.numero1 " .
+           "WHERE 1=1 ";
+
+    if ($codiceLibro != "") {
+        $qry .= "AND Libro.codISBN = '$codiceLibro' ";
+    }
+
+    $qry .= "GROUP BY Ricetta.numero, Ricetta.titolo, Ricetta.tipo, Libro.titolo " .
+            "ORDER BY Ricetta.numero";
+
+    return $qry;
+}
+
 ?>

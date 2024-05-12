@@ -1,8 +1,10 @@
-grigio scuro: #424632
-verde oliva (scuro): #556832
-verde oliva (chiaro): #6b8e23
-verdino superchiaro: #94b94e
-marroncino oliva: #898437
-viola: #6B4B62
-arancio: #8B4513
-oliva: #808000
+Verde Oliva Scuro: #556B2F
+Verde Oliva Chiaro: #6B8E23
+Verde Oliva Intenso: #3C4F04
+Verde Oliva Profondo: #4B5320
+Verde Oliva Grigio: #78866B
+Verde Oliva Metallico: #838996
+Verde Oliva Marrone: #645452
+Verde Oliva Dorato: #B5A642
+Verde Oliva Rosso: #6B4226
+Verde Oliva Blu: #596B8E

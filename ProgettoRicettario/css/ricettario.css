@@ -4,14 +4,14 @@ header {
     top: 0px;
     left: 0px;
 	margin-bottom: 5px;
-    background: #556832;
-    font-family: "Bebas Neue", sans-serif;
+    background: #3C4F04;
+    font-family: "Josefin Sans", sans-serif;
 }
 
 /* body */
 body {
-    background-color: #6b8e23;
-    font-family: "Bebas Neue", sans-serif;
+    background-color: #556B2F;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     margin-bottom: 60px;
 }
@@ -20,12 +20,12 @@ body {
 footer {
     position: fixed;
     width: 100%;
-    height: 80px;
+    height: 60px;
     bottom: 0px;
     left: 0px;
     margin-top: 5px;
-    background: #556832;
-    font-family: "Bebas Neue", sans-serif;
+    background: #3C4F04;
+    font-family: "Josefin Sans", sans-serif;
     text-align: center, center;
 }
 
@@ -56,54 +56,48 @@ footer {
 #container {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    background-color: #6B4B62;
+    background-color: #645452;
     border-radius: 2px;
 }
 
 
 form input[type="text"]{
     color: black;
-    background-color: #94b94e;
+    background-color: #838996;
     width: 50%;
     padding: 10px;
     margin: 10px 10px;
     border: 1px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
 }
 
 form select {
     color: black;
-    background-color: #94b94e;
+    background-color: #838996;
     width: 250px;
     padding: 10px;
     margin: 10px 10px;
     border: 1px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
 }
 
 #searchButton {
     color: black;
-    background-color: #94b94e;
-    width: 10%;
+    background-color: #838996;
+    width: 20%;
     padding: 10px;
     margin: 10px 10px;
     border: 1px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
 }
 
 /* altri elementi*/
-.stringaRicerca, .btnInsert {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  
-
 h1 {
 	padding: 10px;
 	margin: 0px;
@@ -112,13 +106,29 @@ h1 {
 	text-align: center;
 }
 
+#formButton{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0px;
+}
+
+#formButton form {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+#formButton button {
+    flex-shrink: 0; 
+    width: 100px;
+}
+
 /* nav */
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #424632;
+    background-color: #78866B;
   }
   
 li {
@@ -132,15 +142,15 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 24px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
 }
   
 li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #78866B;
 }
   
 .active {
-    background-color: #6B4B62;
+    background-color: #645452;
 }
 
 #risultati {
@@ -149,7 +159,7 @@ li a:hover:not(.active) {
     color: black;
     margin-bottom: 20px;
     border: 3px groove black;
-    background-color: #556832;
+    background-color: #556B2F;
     padding: 10px;
 }
 
@@ -160,16 +170,20 @@ li a:hover:not(.active) {
     border-collapse: separate;
 }
 
+a{
+    color: white;
+}
+
 .header{
-	background: #424632;
+	background: #4B5320;
 }
 
 .rowEven { 
-	background: #898437;
+	background: #6B8E23;
 }
 
 .rowOdd {  
-	background: #94b94e;
+	background: #B5A642;
 }
 
 th, td {
@@ -180,20 +194,20 @@ th, td {
 /* CRUD delete */
 .btnDelete{
     color: black;
-    background-color: #8B4513;
+    background-color: #6B4226;
     border: 3px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
 
 .popupDelete{
     width: 400px;
-    background: #8B4513;
+    background: #6B4226;
     border-radius: 6px;
     position: absolute;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
@@ -208,6 +222,7 @@ th, td {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
+    background-color: #645452;
     scale: 0.8;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -220,10 +235,10 @@ th, td {
 
 .popupDelete button{
     color: black;
-    background-color: #556832;
+    background-color: #6B4226;
     border: 3px solid white;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
@@ -237,20 +252,20 @@ th, td {
 /* CRUD update */
 .btnUpdate{
     color: black;
-    background-color: #006983;
+    background-color: #596B8E;
     border: 3px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
 
 .popupUpdate{
     width: 400px;
-    background: #006983;
+    background: #596B8E;
     border-radius: 6px;
     position: absolute;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
@@ -265,6 +280,7 @@ th, td {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
+    background-color: #78866B;
     scale: 0.8;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -272,10 +288,10 @@ th, td {
 #update {
     color: black;
     width: 50%;
-    background-color: #556832;
+    background-color: #596B8E;
     border: 3px solid white;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
@@ -284,10 +300,10 @@ th, td {
     color: black;
     width: 50%;
     margin-top: 10px;
-    background-color: #556832;
+    background-color: #596B8E;
     border: 3px solid white;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
@@ -301,23 +317,23 @@ th, td {
 /* CRUD insert */
 .btnInsert{
     color: black;
-    background-color: #a10049;
+    background-color: #6B8E23;
     width: 10%;
     padding: 10px;
     margin-right: 0px;
     margin: 10px 10px;
     border: 1px solid black;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
 }
 
 .popupInsert{
     width: 400px;
-    background: #a10049;
+    background: #6B8E23;
     border-radius: 6px;
     position: absolute;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
@@ -332,6 +348,7 @@ th, td {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
+    background-color: #556B2F;
     scale: 0.8;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -345,10 +362,10 @@ th, td {
 #insert {
     color: black;
     width: 50%;
-    background-color: #556832;
+    background-color: #6B8E23;
     border: 3px solid white;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }
@@ -357,10 +374,10 @@ th, td {
     color: black;
     width: 50%;
     margin-top: 10px;
-    background-color: #556832;
+    background-color: #6B8E23;
     border: 3px solid white;
     border-radius: 2px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
 }

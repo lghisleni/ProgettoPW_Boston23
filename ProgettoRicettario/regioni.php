@@ -16,7 +16,7 @@
   <!-- link per scaricare i font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Briem+Hand:wght@100..900&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -52,7 +52,6 @@
 	      }	     
 	      
         $query = getRegioneQry($cod, $nome);
-        echo "<p id=query><b><u>Regione Query</u></b>: " . formattaQuery($query) . "</p>";
 
 	      include 'connDb.php';
 
@@ -92,7 +91,7 @@
 			    <td > <?php echo $i; ?> </td>    						
 				  <td > <?php echo $cod; ?> </td>    
 				  <td > <?php echo $nome; ?> </td> 
-				  <td > <?php echo $n; ?> </td> 
+				  <td > <?php echo formattaLinkRegioni($n, $cod); ?> </td> 
 			  </tr>
       
         <?php } ?>

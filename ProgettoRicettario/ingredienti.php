@@ -16,8 +16,7 @@
   <!-- link per scaricare i font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Briem+Hand:wght@100..900&family=Inter:wght@300;400;700;900&family=Jersey+10&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 
 
@@ -34,13 +33,15 @@
   ?>
 
   <div id="container">
-  
-    <form name="stringaRicerca" method="POST">
-		  <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Inserisci il nome dell'ingrediente"/>
-		  <input id="searchButton" type="submit" value="Search"/>
-		</form>
 
-    <button type="submit" class="btnInsert" onclick="openPopupInsert()"> insert </button>
+    <div id="formButton">
+      <form name="stringaRicerca" method="POST">
+		    <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Inserisci il nome dell'ingrediente"/>
+		    <input id="searchButton" type="submit" value="Search"/>
+		  </form>
+
+      <button type="submit" class="btnInsert" onclick="openPopupInsert()"> Insert </button>
+    </div>
 
     <div  id="risultati">
     <?php
@@ -62,8 +63,13 @@
           $quantita = $_GET["quantita"];
 	      }	     
 	      
-        $query = getIngredientiQry ($numeroRicetta, $numero, $ingrediente, $quantita);
-        echo "<p id=query><b><u>Ingrediente Query</u></b>: " . formattaQuery($query) . "</p>";
+        if(!empty($_POST["nRicetta"])){
+          $query = getIngredientiPerRicetta($_POST["nRicetta"]);
+        } else if(!empty($_GET["nRicetta"])){
+          $query = getIngredientiPerRicetta($_GET["nRicetta"]);
+        } else {
+          $query = getIngredientiQry ($numeroRicetta, $numero, $ingrediente, $quantita);
+        }
 
 	      include 'connDb.php';
 
@@ -111,19 +117,19 @@
 				  <td > <?php echo $numero; ?> </td> 
 				  <td > <?php echo $ingrediente; ?> </td>
           <td > <?php echo $quantita; ?> </td>
-          <td > <?php echo $nomericetta; ?> </td>
+          <td > <?php echo formattaLinkIngrediente($nomericetta); ?> </td>
           <td > <button type="submit" class="btnDelete" onclick="openPopupDelete(
             '<?php echo $numeroRicetta; ?>',
             '<?php echo $numero; ?>',
             '<?php echo $ingrediente; ?>',
             '<?php echo $quantita; ?>'
-          )"> delete </button> </td>
+          )"> Delete </button> </td>
           <td > <button type="submit" class="btnUpdate" onclick="openPopupUpdate(
             '<?php echo $numeroRicetta; ?>',
             '<?php echo $numero; ?>',
             '<?php echo $ingrediente; ?>',
             '<?php echo $quantita; ?>'
-          )"> update </button> </td>
+          )"> Update </button> </td>
 			  </tr>
         <?php } ?>
 			</table>
