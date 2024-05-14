@@ -29,7 +29,7 @@
   <div id="contenuto">
 
     <ul>
-      <li><a href="/ProgettoRicettario/index.php" target="_self">Progetto Ricettario</a></li>
+      <li><a href="/ProgettoRicettario/ingredienti.php" target="_self">Progetto Ricettario</a></li>
       <li><a href="/ProgettoRicettario/index.php" target="_self">Progetto Due</a></li>
     </ul>
 

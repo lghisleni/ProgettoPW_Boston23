@@ -30,12 +30,16 @@
     include 'dbQuery.php';
   ?>
 
-  <div id="container">
-
-    <form name="stringaRicerca" method="POST">
-		<input id="nome" name="nome" type="text" placeholder="Inserisci il nome della regione"/>
-		<input id="searchButton" type="submit" value="Search"/>
-	</form>
+  	<div id="container">
+	  	<div id="containerForm">
+  		<div id="formButton">
+    		<form name="stringaRicerca" id="searchForm" method="POST" onsubmit="handleRicerca(event)">
+				<input id="cod" name="cod" type="text" placeholder="Codice regione"/>
+				<input id="nome" name="nome" type="text" placeholder="Nome della regione"/>
+				<input id="searchButton" type="submit" value="Search"/>
+			</form>
+		</div>
+		</div>
 
     <div  id="risultati">
 
@@ -66,13 +70,22 @@
 
       <table class="table">
 
-				<tr class="header">
-          <th>#</th>
-					<th>Codice</th> 
-					<!--th>id </th--> 
-					<th>Nome</th> 
-					<th>NumeroRicette</th> 
-				</tr>
+	  <tr class="header">
+        <th>#</th>
+        <th>
+            Codice
+            <button class="sort-button" onclick="sortTable(1, 'int')">Sort</button>
+        </th>
+        <th>
+            Nome
+            <button class="sort-button" onclick="sortTable(2, 'string')">Sort</button>
+        </th>
+        <th>
+            NumeroRicette
+        </th>
+    	</tr>
+
+
       
         <?php
 		      $i=0;

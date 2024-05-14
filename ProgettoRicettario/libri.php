@@ -30,13 +30,17 @@
   ?>
 
   <div id="container">
-
-    <form name="stringaRicerca" method="POST">
-		  <input id="nomeLibro" name="nomeLibro" type="text" placeholder="Inserisci il nome del libro"/>
+  	<div id="containerForm">
+    <form name="stringaRicerca" id="searchForm" method="POST" onsubmit="handleRicerca(event)">
+		  <input id="codice" name="codice" type="text" placeholder="Codice ISBN"/>
+		  <input id="nomeLibro" name="nomeLibro" type="text" placeholder="Nome del libro"/>
+		  <input id="anno" name="anno" type="text" placeholder="Anno del libro"/>
 		  <input id="searchButton" type="submit" value="Search"/>
 		</form>
-
-    <div  id="risultati">
+    </div>
+	</div>
+    
+	<div  id="risultati">
 
     <?php
 	      $codice = "";
@@ -45,15 +49,15 @@
 	      if(count($_POST)>0) {
 		      $codice = $_POST["codice"];
 		      $titolo = $_POST["nomeLibro"];
-          $anno = $_POST["anno"];
+          	  $anno = $_POST["anno"];
 	      }	     
 	      else if(count($_GET)>0) {
 		      $codice = $_GET["codice"];
 		      $titolo = $_GET["nomeLibro"];
-          $anno = $_GET["anno"];
+              $anno = $_GET["anno"];
 	      }	     
 	      
-        $query = getLibriQry($numero, $titolo, $tipo);
+        $query = getLibriQry($codice, $titolo, $anno);
 
 	      include 'connDb.php';
 
@@ -68,15 +72,29 @@
 
       <table class="table">
 
-				<tr class="header">
-          <th>#</th>
-					<th>codice ISBN</th> 
-					<!--th>id </th--> 
-					<th>titolo libro</th> 
-					<th>anno di pubblicazione</th>
-          <th># ricette</th>
-          <th># pagine</th> 
-				</tr>
+	  <tr class="header">
+        <th>#</th>
+        <th>
+            Codice ISBN
+            <button class="sort-button" onclick="sortTable(1, 'string')">Sort</button>
+        </th>
+        <!--th>id </th-->
+        <th>
+            Titolo Libro
+            <button class="sort-button" onclick="sortTable(2, 'string')">Sort</button>
+        </th>
+        <th>
+            Anno di Pubblicazione
+            <button class="sort-button" onclick="sortTable(3, 'int')">Sort</button>
+        </th>
+        <th>
+            # Ricette
+        </th>
+        <th>
+            # Pagine
+        </th>
+    	</tr>
+
       
         <?php
 		      $i=0;

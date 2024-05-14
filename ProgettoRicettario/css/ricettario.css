@@ -3,14 +3,24 @@ header {
     width: 100%;
     top: 0px;
     left: 0px;
-	margin-bottom: 5px;
-    background: #3C4F04;
+    margin-bottom: 5px;
+    background: #556B2F; /* Olive Drab */
     font-family: "Josefin Sans", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 60px;
+    color: black;
 }
 
 /* body */
 body {
-    background-color: #556B2F;
+    background-color: #6B8E23; /* Olive Green */
     font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     margin-bottom: 60px;
@@ -24,17 +34,17 @@ footer {
     bottom: 0px;
     left: 0px;
     margin-top: 5px;
-    background: #3C4F04;
+    background: #556B2F; /* Olive Drab */
     font-family: "Josefin Sans", sans-serif;
-    text-align: center, center;
+    text-align: center;
 }
 
-#containerFooter{
+#containerFooter {
     width: 100%;
     height: 100%;
 }
 
-#testoFooterSx{
+#testoFooterSx {
     margin-left: 20px;
     padding: 0px;
     text-align: left;
@@ -43,7 +53,7 @@ footer {
     float: left;
 }
 
-#testoFooterDx{
+#testoFooterDx {
     margin-right: 20px;
     padding: 0px;
     text-align: right;
@@ -55,15 +65,14 @@ footer {
 /* container e form ricerca */
 #container {
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    background-color: #645452;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #808000; /* Olive */
     border-radius: 2px;
 }
 
-
-form input[type="text"]{
+form input[type="text"] {
     color: black;
-    background-color: #838996;
+    background-color: #9ACD32; /* Yellow Green */
     width: 50%;
     padding: 10px;
     margin: 10px 10px;
@@ -75,7 +84,7 @@ form input[type="text"]{
 
 form select {
     color: black;
-    background-color: #838996;
+    background-color: #9ACD32; /* Yellow Green */
     width: 250px;
     padding: 10px;
     margin: 10px 10px;
@@ -87,7 +96,7 @@ form select {
 
 #searchButton {
     color: black;
-    background-color: #838996;
+    background-color: #9ACD32; /* Yellow Green */
     width: 20%;
     padding: 10px;
     margin: 10px 10px;
@@ -97,16 +106,38 @@ form select {
     font-size: 24px;
 }
 
-/* altri elementi*/
-h1 {
-	padding: 10px;
-	margin: 0px;
-	font-size : 60px;
-	color: black;
-	text-align: center;
+#searchButton:hover {
+    background-color: #556B2F; /* Olive Drab */
+    color: white;
 }
 
-#formButton{
+/* altri elementi */
+h1 {
+    padding: 10px;
+    margin: 0px;
+    font-size: 60px;
+    color: black;
+    text-align: center;
+    display: inline-block;
+}
+
+#containerForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#containerForm form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#containerForm input[type="text"], #containerForm input[type="submit"] {
+    margin-right: 10px; /* Aggiunge spazio tra i campi */
+}
+
+#formButton {
     display: grid;
     grid-template-columns: auto auto;
     gap: 0px;
@@ -115,10 +146,10 @@ h1 {
 #formButton form {
     flex: 1;
     margin-right: 10px;
-  }
-  
+}
+
 #formButton button {
-    flex-shrink: 0; 
+    flex-shrink: 0;
     width: 100px;
 }
 
@@ -128,13 +159,13 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #78866B;
-  }
-  
+    background-color: #556B2F; /* Olive Drab */
+}
+
 li {
     float: left;
 }
-  
+
 li a {
     display: block;
     color: white;
@@ -144,13 +175,13 @@ li a {
     font-size: 24px;
     font-family: "Josefin Sans", sans-serif;
 }
-  
+
 li a:hover:not(.active) {
-    background-color: #78866B;
+    background-color: #6B8E23; /* Olive Green */
 }
-  
+
 .active {
-    background-color: #645452;
+    background-color: #808000; /* Olive */
 }
 
 #risultati {
@@ -159,31 +190,31 @@ li a:hover:not(.active) {
     color: black;
     margin-bottom: 20px;
     border: 3px groove black;
-    background-color: #556B2F;
+    background-color: #6B8E23; /* Olive Green */
     padding: 10px;
 }
 
-.table{
+.table {
     width: 100%;
-	border: 3px solid black;
+    border: 3px solid black;
     color: white;
-    border-collapse: separate;
+    border-collapse: collapse;
 }
 
-a{
+a {
     color: white;
 }
 
-.header{
-	background: #4B5320;
+.header {
+    background: #556B2F; /* Olive Drab */
 }
 
-.rowEven { 
-	background: #6B8E23;
+.rowEven {
+    background: #6B8E23; /* Olive Green */
 }
 
-.rowOdd {  
-	background: #B5A642;
+.rowOdd {
+    background: #808000; /* Olive */
 }
 
 th, td {
@@ -192,9 +223,9 @@ th, td {
 }
 
 /* CRUD delete */
-.btnDelete{
+.btnDelete {
     color: black;
-    background-color: #6B4226;
+    background-color: #A0522D; /* Saddle Brown */
     border: 3px solid black;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
@@ -202,9 +233,14 @@ th, td {
     cursor: pointer;
 }
 
-.popupDelete{
+.btnDelete:hover {
+    background-color: #556B2F; /* Olive Drab */
+    color: white;
+}
+
+.popupDelete {
     width: 400px;
-    background: #6B4226;
+    background: #A0522D; /* Saddle Brown */
     border-radius: 6px;
     position: absolute;
     font-family: "Josefin Sans", sans-serif;
@@ -218,29 +254,34 @@ th, td {
     transition: transform 1s;
 }
 
-.popupDelete img{
+.popupDelete img {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
-    background-color: #645452;
+    background-color: #D3D3D3; /* Light gray */
     scale: 0.8;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.popupDelete h2{
+.popupDelete h2 {
     font-size: 30px;
     font-weight: 500;
     margin: 30px 0 10px;
 }
 
-.popupDelete button{
+.popupDelete button {
     color: black;
-    background-color: #6B4226;
+    background-color: #9ACD32; /* Yellow Green */
     border: 3px solid white;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
+}
+
+.popupDelete button:hover {
+    background-color: #556B2F; /* Olive Drab */
+    color: white;
 }
 
 .open-popupDelete {
@@ -250,9 +291,9 @@ th, td {
 }
 
 /* CRUD update */
-.btnUpdate{
+.btnUpdate {
     color: black;
-    background-color: #596B8E;
+    background-color: #556B2F; /* Olive Drab */
     border: 3px solid black;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
@@ -260,9 +301,14 @@ th, td {
     cursor: pointer;
 }
 
-.popupUpdate{
+.btnUpdate:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
+}
+
+.popupUpdate {
     width: 400px;
-    background: #596B8E;
+    background: #556B2F; /* Olive Drab */
     border-radius: 6px;
     position: absolute;
     font-family: "Josefin Sans", sans-serif;
@@ -276,19 +322,19 @@ th, td {
     transition: transform 1s;
 }
 
-.popupUpdate img{
+.popupUpdate img {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
-    background-color: #78866B;
+    background-color: #D3D3D3; /* Light gray */
     scale: 0.8;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #update {
     color: black;
     width: 50%;
-    background-color: #596B8E;
+    background-color: #9ACD32; /* Yellow Green */
     border: 3px solid white;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
@@ -296,16 +342,26 @@ th, td {
     cursor: pointer;
 }
 
-.popupUpdate button{
+#update:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
+}
+
+.popupUpdate button {
     color: black;
     width: 50%;
     margin-top: 10px;
-    background-color: #596B8E;
+    background-color: #9ACD32; /* Yellow Green */
     border: 3px solid white;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
+}
+
+.popupUpdate button:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
 }
 
 .open-popupUpdate {
@@ -315,9 +371,9 @@ th, td {
 }
 
 /* CRUD insert */
-.btnInsert{
+.btnInsert {
     color: black;
-    background-color: #6B8E23;
+    background-color: #6B8E23; /* Olive Green */
     width: 10%;
     padding: 10px;
     margin-right: 0px;
@@ -328,9 +384,14 @@ th, td {
     font-size: 24px;
 }
 
-.popupInsert{
+.btnInsert:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
+}
+
+.popupInsert {
     width: 400px;
-    background: #6B8E23;
+    background: #6B8E23; /* Olive Green */
     border-radius: 6px;
     position: absolute;
     font-family: "Josefin Sans", sans-serif;
@@ -344,16 +405,16 @@ th, td {
     transition: transform 1s;
 }
 
-.popupInsert img{
+.popupInsert img {
     width: 100%;
     margin-top: -50px;
     border-radius: 50%;
-    background-color: #556B2F;
+    background-color: #D3D3D3; /* Light Gray */
     scale: 0.8;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.popupInsert h2{
+.popupInsert h2 {
     font-size: 30px;
     font-weight: 500;
     margin: 30px 0 10px;
@@ -362,7 +423,7 @@ th, td {
 #insert {
     color: black;
     width: 50%;
-    background-color: #6B8E23;
+    background-color: #9ACD32; /* Yellow Green */
     border: 3px solid white;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
@@ -370,16 +431,26 @@ th, td {
     cursor: pointer;
 }
 
-.popupInsert button{
+#insert:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
+}
+
+.popupInsert button {
     color: black;
     width: 50%;
     margin-top: 10px;
-    background-color: #6B8E23;
+    background-color: #9ACD32; /* Yellow Green */
     border: 3px solid white;
     border-radius: 2px;
     font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     cursor: pointer;
+}
+
+.popupInsert button:hover {
+    background-color: #2F4F4F; /* Dark slate gray */
+    color: white;
 }
 
 .open-popupInsert {
@@ -388,4 +459,37 @@ th, td {
     transform: translate(-50%, -50%) scale(0.8);
 }
 
+/* bottone ordinamento */
+/* Stile generale per i bottoni di ordinamento */
+.sort-button {
+    background-color: white; /* Sfondo bianco */
+    border: 2px solid black; /* Bordo nero per definizione */
+    cursor: pointer;
+    font-size: 16px;
+    color: black; /* Testo nero */
+    padding: 5px 10px;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px; /* Bordo arrotondato */
+    transition: background-color 0.3s, color 0.3s; /* Transizioni per hover */
+}
 
+.sort-button:hover {
+    background-color: black; /* Sfondo nero al passaggio del mouse */
+    color: white; /* Testo bianco al passaggio del mouse */
+}
+
+/* Icona ascendente */
+.sort-button.sort-asc::after {
+    content: '▲';
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Icona discendente */
+.sort-button.sort-desc::after {
+    content: '▼';
+    font-size: 12px;
+    margin-left: 5px;
+}

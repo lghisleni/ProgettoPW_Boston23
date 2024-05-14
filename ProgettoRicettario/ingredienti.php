@@ -35,10 +35,14 @@
   <div id="container">
 
     <div id="formButton">
-      <form name="stringaRicerca" method="POST">
-		    <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Inserisci il nome dell'ingrediente"/>
+      <div id="containerForm">
+      <form name="stringaRicerca" id="searchForm" method="POST" onsubmit="handleRicerca(event)">
+        <input id="numeroRicetta" name="numeroRicetta" type="text" placeholder="Numero ricetta"/>
+        <input id="numero" name="numero" type="text" placeholder="Numero dell'ingrediente"/>
+		    <input id="nomeIngrediente" name="nomeIngrediente" type="text" placeholder="Nome dell'ingrediente"/>
 		    <input id="searchButton" type="submit" value="Search"/>
 		  </form>
+      </div>
 
       <button type="submit" class="btnInsert" onclick="openPopupInsert()"> Insert </button>
     </div>
@@ -83,17 +87,30 @@
       ?>
 
       <table class="table">
-
 				<tr class="header">
           <th>#</th>
-					<th>numero ricetta</th> 
-					<!--th>id </th--> 
-					<th>numero ingrediente</th> 
-					<th>nome ingrediente</th>
-          <th># quantita</th>
-          <th># nome ricetta</th>
-          <th>Delete</th>
-          <th>Update</th>
+					<th>
+            Numero ricetta
+            <button onclick="sortTable(1, 'int')" class="sort-button">Sort</button>
+        </th>
+        <th>
+            Numero ingrediente
+            <button onclick="sortTable(2, 'int')" class="sort-button">Sort</button>
+        </th>
+        <th>
+            Nome ingrediente
+            <button onclick="sortTable(3, 'string')" class="sort-button">Sort</button>
+        </th>
+        <th>
+            Quantità
+            <button onclick="sortTable(4, 'int')" class="sort-button">Sort</button>
+        </th>
+        <th>
+            Nome ricetta
+            <button onclick="sortTable(5, 'string')" class="sort-button">Sort</button>
+        </th>
+        <th>Delete</th>
+        <th>Update</th>
 				</tr>
       
         <?php

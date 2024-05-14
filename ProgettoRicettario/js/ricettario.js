@@ -178,3 +178,80 @@ function annulaInsert(){
     popUpInsert.classList.remove("open-popupInsert")
 }
 
+/* form ricerca */
+
+function handleRicerca(event) {
+    event.preventDefault();
+    window.history.replaceState({}, document.title, window.location.pathname);
+    document.getElementById("searchForm").submit();
+}
+
+/* sorting */
+function sortTable(columnIndex, dataType) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.querySelector(".table");
+    switching = true;
+    dir = "asc"; // Set the sorting direction to ascending initially
+
+    // Rimuove le classi di ordinamento da tutti i bottoni di ordinamento
+    const headers = table.querySelectorAll(".header th .sort-button");
+    headers.forEach(button => {
+        button.classList.remove("sort-asc", "sort-desc");
+    });
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+            if (dataType == 'int') {
+                if (dir == "asc") {
+                    if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            } else if (dataType == 'string') {
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+
+    // Aggiunge la classe di ordinamento appropriata al bottone cliccato
+    const headerButton = table.rows[0].getElementsByTagName("TH")[columnIndex].getElementsByClassName("sort-button")[0];
+    if (dir == "asc") {
+        headerButton.classList.add("sort-asc");
+    } else {
+        headerButton.classList.add("sort-desc");
+    }
+}
+

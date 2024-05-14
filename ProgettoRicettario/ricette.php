@@ -31,9 +31,10 @@
   ?>
 
   <div id="container">
-
-    <form name="stringaRicerca" method="POST">
-		  <input id="nomeRicetta" name="nomeRicetta" type="text" placeholder="Inserisci il nome della riccetta"/>
+    <div id="containerForm">
+    <form name="stringaRicerca" id="searchForm" method="POST" onsubmit="handleRicerca(event)">
+      <input id="numero" name="numero" type="text" placeholder="Numero della riccetta"/>
+		  <input id="nomeRicetta" name="nomeRicetta" type="text" placeholder="Nome della riccetta"/>
       <select id="tipo" name="tipo">
         <option value="">(Tipologia Piatto)</option>
         <option value="antipasto">Antipasto</option>
@@ -44,7 +45,9 @@
       </select>
 		  <input id="searchButton" type="submit" value="Search"/>
 		</form>
-
+    </div>
+    </div>
+    
     <div  id="risultati">
 
       <?php
@@ -87,15 +90,30 @@
 
       <table class="table">
 
-				<tr class="header">
-          <th>#</th>
-					<th>numero</th> 
-					<!--th>id </th--> 
-					<th>titolo ricetta</th> 
-					<th>tipo ricetta</th>
-          <th>titolo libro</th>
-          <th># libri</th> 
-				</tr>
+      <tr class="header">
+        <th>#</th>
+        <th>
+            Numero
+            <button class="sort-button" onclick="sortTable(1, 'int')">Sort</button>
+        </th>
+        <!--th>id </th-->
+        <th>
+            Titolo Ricetta
+            <button class="sort-button" onclick="sortTable(2, 'string')">Sort</button>
+        </th>
+        <th>
+            Tipo Ricetta
+            <button class="sort-button" onclick="sortTable(3, 'string')">Sort</button>
+        </th>
+        <th>
+            Titolo Libro
+            <button class="sort-button" onclick="sortTable(4, 'string')">Sort</button>
+        </th>
+        <th>
+            # Libri
+        </th>
+      </tr>
+
       
         <?php
 		      $i=0;

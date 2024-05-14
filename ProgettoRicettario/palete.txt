@@ -1,10 +1,6 @@
-Verde Oliva Scuro: #556B2F
-Verde Oliva Chiaro: #6B8E23
-Verde Oliva Intenso: #3C4F04
-Verde Oliva Profondo: #4B5320
-Verde Oliva Grigio: #78866B
-Verde Oliva Metallico: #838996
-Verde Oliva Marrone: #645452
-Verde Oliva Dorato: #B5A642
-Verde Oliva Rosso: #6B4226
-Verde Oliva Blu: #596B8E
+#556B2F - Olive Drab
+#6B8E23 - Olive Green
+#808000 - Olive
+#9ACD32 - Yellow Green
+#A0522D - Saddle Brown
+#D3D3D3 - Light Gray
