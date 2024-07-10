@@ -30,7 +30,7 @@
 
     <ul>
       <li><a href="/ProgettoRicettario/ingredienti.php" target="_self">Progetto Ricettario</a></li>
-      <li><a href="/ProgettoRicettario/index.php" target="_self">Progetto Due</a></li>
+      <li><a href="/ProgettoMigrazioneDati/index.php" target="_self">Progetto Migrazione Dati</a></li>
     </ul>
 
   </div>
