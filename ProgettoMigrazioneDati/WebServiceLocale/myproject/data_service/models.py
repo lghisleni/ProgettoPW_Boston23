@@ -10,11 +10,11 @@ class Libro(models.Model):
         return self.titolo
 
 class Pagina(models.Model):
-    numero_pagina = models.IntegerField()
+    numeroPagina = models.IntegerField()
     libro = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"Libro {self.libro}, Pagina {self.numero_pagina}"
+        return f"Libro {self.libro}, Pagina {self.numeroPagina}"
     
 class Regione(models.Model):
     cod = models.IntegerField(primary_key=True)
@@ -31,13 +31,18 @@ class Ricetta(models.Model):
     def str(self):
         return self.titolo
 
+from django.db import models
+
 class Ingrediente(models.Model):
-    numero = models.IntegerField(primary_key=True)
-    numeroRicetta = models.ForeignKey(Ricetta, on_delete=models.CASCADE, related_name='ingredienti')
+    numero = models.IntegerField()
+    numeroRicetta = models.IntegerField()
     ingrediente = models.CharField(max_length=200)
     quantita = models.IntegerField()
 
-    def str(self):
+    class Meta:
+        unique_together = (('numero', 'numeroRicetta'),)
+
+    def _str_(self):
         return self.ingrediente
     
 class RicettaPubblicata(models.Model):
