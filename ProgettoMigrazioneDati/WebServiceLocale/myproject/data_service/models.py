@@ -34,31 +34,31 @@ class Ricetta(models.Model):
 from django.db import models
 
 class Ingrediente(models.Model):
+    id = models.BigAutoField(primary_key=True)
     numero = models.IntegerField()
     numeroRicetta = models.IntegerField()
     ingrediente = models.CharField(max_length=200)
     quantita = models.IntegerField()
 
-    class Meta:
-        unique_together = (('numero', 'numeroRicetta'),)
-
     def _str_(self):
         return self.ingrediente
-    
-class RicettaPubblicata(models.Model):
-    numeroRicetta = models.ForeignKey(Ricetta, on_delete=models.CASCADE)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    numeroPagina = models.ForeignKey(Pagina, on_delete=models.CASCADE)
 
-    def str(self):
-        return f"Ricetta {self.numeroRicetta.numero} in Libro {self.libro.codISBN} a Pagina {self.numeroPagina.numero_pagina}"
-    
+class RicettaPubblicata(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    numeroRicetta = models.IntegerField()
+    libro = models.IntegerField()
+    numeroPagina = models.IntegerField()
+
+    def _str_(self):
+        return f"Ricetta {self.numeroRicetta} in Libro {self.libro} a Pagina {self.numeroPagina}"
+
 class RicettaRegionale(models.Model):
-    regione = models.ForeignKey(Regione, on_delete=models.CASCADE)
-    ricetta = models.ForeignKey(Ricetta, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
+    regione = models.IntegerField()
+    ricetta = models.IntegerField()
 
     class Meta:
         unique_together = ('regione', 'ricetta')
 
-    def str(self):
-        return f"Ricetta {self.ricetta.titolo} della Regione {self.regione.nome}"
+    def _str_(self):
+        return f"Ricetta {self.ricetta} della Regione {self.regione}"
